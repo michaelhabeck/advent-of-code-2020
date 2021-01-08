@@ -1,10 +1,12 @@
 import numpy as np
+import functools
 
 def load_adapters(filename):
     adapters = np.sort(np.loadtxt(filename, dtype=int))
     #  charging outlet - adapters - device
     return np.hstack([0, adapters, adapters[-1] + 3])
     
+@functools.lru_cache(maxsize = 128) 
 def n_paths(n):
     """Number of paths in size-n block of adapters with consecutive joltages.
     """
